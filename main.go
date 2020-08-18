@@ -25,11 +25,11 @@ func SetXlsCellSize(picWidth, picHeight int, xlsxFilePath string) {
 		panic(err)
 	}
 
-	for rowNo := 1; rowNo < (1 + picHeight); rowNo++ {
+	for rowNo := 1; rowNo <= picHeight; rowNo++ {
 		xlsxFile.SetRowHeight("Sheet1", rowNo, 6)
 	}
 
-	for colNo := 1; colNo < (1 + picWidth); colNo++ {
+	for colNo := 1; colNo <= picWidth; colNo++ {
 		colName, err := excelize.ColumnNumberToName(colNo)
 		if nil != err {
 			panic(err)
@@ -63,10 +63,10 @@ func main() {
 		}
 
 	default:
-		fmt.Println("Usage: Pixel2Excel xxx.jpg|xxx.png")
+		fmt.Println("Usage:  Pixel2Excel xxx.jpg|xxx.png")
 		return
 	}
-	fmt.Printf("pic = %s xlsx = %s\r\n", picFilePath, xlsFilePath)
+	fmt.Printf("Pic Path = %s Xlsx Path = %s\r\n", picFilePath, xlsFilePath)
 
 	picFile, err := os.Open(picFilePath)
 	if err != nil {
@@ -100,8 +100,8 @@ func main() {
 	}
 
 	//fgColorStr := "FF00FF00"
-	for rowNo := 0; rowNo < (0 + picHeight); rowNo++ {
-		for colNo := 0; colNo < (0 + picWidth); colNo++ {
+	for rowNo := 0; rowNo < picHeight; rowNo++ {
+		for colNo := 0; colNo < picWidth; colNo++ {
 			cell := sheet.Cell(rowNo, colNo)
 
 			if nil != err {
