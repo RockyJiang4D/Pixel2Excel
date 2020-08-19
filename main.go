@@ -11,6 +11,7 @@ import (
 	"image/png"
 	"os"
 
+	"path"
 	"strings"
 	"time"
 
@@ -54,16 +55,18 @@ func main() {
 		if !strings.HasSuffix(args[1], ".jpg") && !strings.HasSuffix(args[1], ".png") {
 			panic(errors.New("Invalid command format"))
 		}
-		picFilePath = args[1]
 
-		if argc == 3 && !strings.HasSuffix(args[2], ".xlsx") {
-			xlsFilePath = args[2]
+		picFilePath = path.Base(args[1])
+
+		if argc == 3 && strings.HasSuffix(args[2], ".xlsx") {
+			xlsFilePath = path.Base(args[2])
 		} else {
-			xlsFilePath = picFilePath[:len(picFilePath)-4] + ".xlsx"
+			fileExt := path.Ext(picFilePath)
+			xlsFilePath = strings.TrimSuffix(picFilePath, fileExt) + ".xlsx"
 		}
 
 	default:
-		fmt.Println("Usage:  Pixel2Excel xxx.jpg|xxx.png")
+		fmt.Println("Command Usage:\r\n    Pixel2Excel xxx.jpg|xxx.png")
 		return
 	}
 	fmt.Printf("Pic Path = %s Xlsx Path = %s\r\n", picFilePath, xlsFilePath)
