@@ -67,7 +67,7 @@ func main() {
 
 	default:
 		fmt.Println("Command Usage:\r\n    Pixel2Excel xxx.jpg|xxx.png")
-		return
+		os.Exit(1)
 	}
 	fmt.Printf("Pic Path = %s Xlsx Path = %s\r\n", picFilePath, xlsFilePath)
 
